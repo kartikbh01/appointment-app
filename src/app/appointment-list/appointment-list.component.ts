@@ -1,6 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Appointment } from '../models/appointment';
-import { OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-appointment-list',
@@ -9,47 +8,60 @@ import { OnInit } from '@angular/core';
 })
 export class AppointmentListComponent implements OnInit {
   newAppointmentTitle: string = '';
-  newAppointmentDate: Date = new Date();
+  newAppointmentDate: string = new Date().toISOString(); // use string for input[type="date"]
   appointments: Appointment[] = [];
 
-  // 0. initializing the data from localStorage
-  // ngOnInit -> a lifecycle hook
+  // Load from localStorage
   ngOnInit(): void {
-    // console.log("loaded")
-    let savedAppointments = localStorage.getItem('appointments');
-    this.appointments = savedAppointments ? JSON.parse(savedAppointments) : [];
-    this.appointments.map((a) => (a.date = new Date(a.date)));
-  }
+    const savedAppointments = localStorage.getItem('appointments');
 
-  // methods
+    if (savedAppointments) {
+      try {
+        const parsed = JSON.parse(savedAppointments);
 
-  // 1. add an appointment
-  addAppointment() {
-    // alert(this.newAppointmentDate + ' ' + this.newAppointmentTitle);
-
-    if (this.newAppointmentTitle.trim().length && this.newAppointmentDate) {
-      let newAppointMent: Appointment = {
-        id: crypto.randomUUID(),
-        date: this.newAppointmentDate,
-        title: this.newAppointmentTitle,
-      };
-
-      this.appointments.push(newAppointMent);
-
-      // reset fields
-      this.newAppointmentTitle = '';
-      this.newAppointmentDate = new Date();
-
-      console.log(this.appointments);
-
-      // localstorage persistence
-      localStorage.setItem('appointments', JSON.stringify(this.appointments));
+        this.appointments = parsed.map((a: any) => ({
+          ...a,
+          date: new Date(a.date), // restore Date object
+        }));
+      } catch (e) {
+        console.error('Invalid data in localStorage', e);
+        this.appointments = [];
+      }
     }
   }
 
-  // 2. remove an appointment
+  // Add appointment
+  addAppointment() {
+    if (!this.newAppointmentTitle.trim() || !this.newAppointmentDate) return;
+
+    const newAppointment: Appointment = {
+      id: crypto.randomUUID(),
+      title: this.newAppointmentTitle.trim(),
+      date: new Date(this.newAppointmentDate), // convert string → Date
+    };
+
+    this.appointments.push(newAppointment);
+
+    this.saveToLocalStorage();
+
+    // reset fields
+    this.newAppointmentTitle = '';
+    this.newAppointmentDate = new Date().toISOString();
+  }
+
+  // Remove appointment
   removeAppointment(index: number) {
     this.appointments.splice(index, 1);
-    localStorage.setItem('appointments', JSON.stringify(this.appointments));
+    this.saveToLocalStorage();
+  }
+
+  // Centralized storage logic
+  private saveToLocalStorage() {
+    const data = this.appointments.map((a) => ({
+      ...a,
+      date: a.date.toISOString(), // Date → string
+    }));
+
+    localStorage.setItem('appointments', JSON.stringify(data));
   }
 }

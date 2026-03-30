@@ -1,25 +1,65 @@
-<div>
-  <!-- two way data binding -->
-  <input
-    [(ngModel)]="newAppointmentTitle"
-    placeholder="Appointment description"
-  />
-  <input
-    [(ngModel)]="newAppointmentDate"
-    type="date"
-    placeholder="Appointment date"
-  />
+<div class="container py-5 dark-bg text-light">
+  <div class="card shadow-sm appointment-card-dark">
+    <div class="card-body">
+      <h2 class="text-center mb-4">Create New Appointment</h2>
 
-  <!-- add a new appointment -->
-  <button (click)="addAppointment()">Add</button>
+      <div class="row g-3 align-items-center">
+        <div class="col-md-5">
+          <input
+            class="form-control dark-input"
+            [(ngModel)]="newAppointmentTitle"
+            placeholder="Appointment description"
+          />
+        </div>
+
+        <div class="col-md-3">
+          <input
+            class="form-control dark-input"
+            [(ngModel)]="newAppointmentDate"
+            type="date"
+          />
+        </div>
+
+        <div class="col-md-4 text-md-start text-center">
+          <button
+            class="btn btn-primary w-100 add-btn"
+            (click)="addAppointment()"
+          >
+            Add Appointment
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Appointment List -->
+  <div class="mt-4">
+    <ul class="list-group appointment-list-dark">
+      <li
+        class="list-group-item d-flex justify-content-between align-items-center"
+        *ngFor="let appointment of appointments; index as i"
+      >
+        <div>
+          <strong>{{ appointment.title }}</strong>
+          <div class="text-muted small">
+            {{ appointment.date.toDateString() }}
+          </div>
+        </div>
+
+        <button
+          class="btn btn-outline-danger btn-sm"
+          (click)="removeAppointment(i)"
+        >
+          Remove
+        </button>
+      </li>
+    </ul>
+
+    <div
+      *ngIf="appointments.length === 0"
+      class="text-center text-muted mt-3"
+    >
+      No appointments yet
+    </div>
+  </div>
 </div>
-
-<ul>
-  <!-- list out the appointments -->
-  <li *ngFor="let appointment of appointments; index as i">
-    {{ appointment.title }} | {{ appointment.date.toDateString() }}
-
-    <!-- remove an appointment -->
-    <button (click)="removeAppointment(i)">remove</button>
-  </li>
-</ul>

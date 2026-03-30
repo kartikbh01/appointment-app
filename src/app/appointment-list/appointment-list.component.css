@@ -1,0 +1,46 @@
+/* Card styling */
+.appointment-card {
+  border-radius: 12px;
+  border: none;
+}
+
+/* Input focus effect */
+.form-control:focus {
+  box-shadow: 0 0 0 0.15rem rgba(13, 110, 253, 0.25);
+  border-color: #0d6efd;
+}
+
+/* Button enhancement */
+.add-btn {
+  font-weight: 500;
+  border-radius: 8px;
+  transition: all 0.2s ease-in-out;
+}
+
+.add-btn:hover {
+  transform: translateY(-1px);
+}
+
+/* Appointment list */
+.appointment-list .list-group-item {
+  border-radius: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #eee;
+  transition: all 0.2s ease;
+}
+
+.appointment-list .list-group-item:hover {
+  background-color: #f8f9fa;
+}
+
+/* Remove button */
+.btn-outline-danger {
+  border-radius: 6px;
+}
+
+/* Responsive spacing */
+@media (max-width: 768px) {
+  .add-btn {
+    width: 100%;
+  }
+}
