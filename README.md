@@ -40,27 +40,6 @@ This project helped in understanding core Angular concepts:
 
 ---
 
-## 📁 Project Structure
-src/
-│
-├── app/
-│ ├── appointment-list/
-│ │ ├── appointment-list.component.html
-│ │ ├── appointment-list.component.ts
-│ │ ├── appointment-list.component.css
-│ │
-│ ├── models/
-│ │ └── appointment.ts
-│ │
-│ ├── app.component.ts
-│ ├── app.module.ts
-│
-├── index.html
-├── main.ts
-├── styles.css
-
----
-
 ## 🛠️ Setup & Run
 
 ### Install dependencies:
