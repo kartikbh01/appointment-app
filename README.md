@@ -1,27 +1,76 @@
-# AppointmentApp
+# 📅 Angular Appointment Manager
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.6.
+A simple Angular application to create, view, and manage appointments. This project was built as a hands-on introduction to Angular fundamentals.
 
-## Development server
+![alt text](/src/assets/image.png)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+---
 
-## Code scaffolding
+## 🚀 Features
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- Add new appointments with title and date
+- View a list of all appointments
+- Remove appointments
+- Persist data using `localStorage`
 
-## Build
+---
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## 🧠 Concepts Learned
 
-## Running unit tests
+This project helped in understanding core Angular concepts:
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+- **Two-way Data Binding (`[(ngModel)]`)**
+  - Syncs input fields with component state
 
-## Running end-to-end tests
+- **Lifecycle Hook (`ngOnInit`)**
+  - Used to initialize data when the component loads
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+- **Structural Directives**
+  - `*ngFor` → Loop through appointments
+  - `*ngIf` → Conditional rendering (empty state)
 
-## Further help
+- **FormsModule**
+  - Enables working with form inputs in Angular
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+- **Event Binding (`(click)`)**
+  - Handles user actions like adding/removing appointments
+
+- **Local Storage Integration**
+  - Save and retrieve data persistently
+
+---
+
+## 📁 Project Structure
+src/
+│
+├── app/
+│ ├── appointment-list/
+│ │ ├── appointment-list.component.html
+│ │ ├── appointment-list.component.ts
+│ │ ├── appointment-list.component.css
+│ │
+│ ├── models/
+│ │ └── appointment.ts
+│ │
+│ ├── app.component.ts
+│ ├── app.module.ts
+│
+├── index.html
+├── main.ts
+├── styles.css
+
+---
+
+## 🛠️ Setup & Run
+
+### Install dependencies:
+
+`npm install`
+
+### Run the app:
+
+`ng serve`
+
+### Open in browser:
+
+`http://localhost:4200`
