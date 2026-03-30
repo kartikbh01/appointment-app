@@ -1,0 +1,25 @@
+<div>
+  <!-- two way data binding -->
+  <input
+    [(ngModel)]="newAppointmentTitle"
+    placeholder="Appointment description"
+  />
+  <input
+    [(ngModel)]="newAppointmentDate"
+    type="date"
+    placeholder="Appointment date"
+  />
+
+  <!-- add a new appointment -->
+  <button (click)="addAppointment()">Add</button>
+</div>
+
+<ul>
+  <!-- list out the appointments -->
+  <li *ngFor="let appointment of appointments; index as i">
+    {{ appointment.title }} | {{ appointment.date.toDateString() }}
+
+    <!-- remove an appointment -->
+    <button (click)="removeAppointment(i)">remove</button>
+  </li>
+</ul>
